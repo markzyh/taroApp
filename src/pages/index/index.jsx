@@ -1,16 +1,20 @@
 import Taro, { Component } from "@tarojs/taro";
-import { View, Text } from "@tarojs/components";
-import style from "./index.module.less";
-import Test from "../../components/test";
+import style from "./index.module.scss";
 import { AtButton } from "taro-ui";
-// import "taro-ui/dist/style/components/button.scss";
+import { View, Text, Swiper, SwiperItem, Image } from "@tarojs/components";
+import avatarImg from "../../static/images/avatar.png";
+import calendarImg from "../../static/images/icon-calendar.png";
+
 export default class Index extends Component {
   config = {
     navigationBarTitleText: "首页"
   };
   state = {
-    test: "测试",
-    propsData: "propsData"
+    imgUrls: [
+      "https://img10.360buyimg.com/babel/s700x360_jfs/t25855/203/725883724/96703/5a598a0f/5b7a22e1Nfd6ba344.jpg!q90!cc_350x180",
+      "https://img11.360buyimg.com/babel/s700x360_jfs/t1/4776/39/2280/143162/5b9642a5E83bcda10/d93064343eb12276.jpg!q90!cc_350x180",
+      "https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180"
+    ]
   };
 
   componentWillMount() {}
@@ -23,25 +27,43 @@ export default class Index extends Component {
 
   componentDidHide() {}
 
-  redirectTo() {
-    Taro.navigateTo({
-      url: "/pages/login/login?id=12&type=test"
-    });
-  }
-
   render() {
-    const { test, propsData } = this.state;
-    console.log(style.testclass);
+    const {
+      current,
+      isAutoplay,
+      duration,
+      isCircular,
+      interval,
+      hasIndicatorDots,
+      imgUrls
+    } = this.state;
     return (
       <View className={style.index}>
-        <Text className={style.hello}>Hello world!</Text>
-        <Test
-          propsData={propsData}
-          my-class={style.redtext}
-          className={style.redtext}
-        />
-        <AtButton type="primary">按钮文案</AtButton>
-        <Text onClick={() => this.redirectTo()}>click</Text>
+        <View className={style.header}>
+          <img src={avatarImg} alt="" className={style.avatarImg} />
+          亲爱的，下午好
+          <img src={calendarImg} alt="" className={style.calendarImg} />
+        </View>
+        <View className={style.swiper}>
+          <Swiper
+            className={style.swiperContainer}
+            indicatorColor="#999"
+            indicatorActiveColor="#333"
+            current="1"
+          >
+            {imgUrls.map((item, idx) => (
+              <SwiperItem key={idx} className={style.swiperItem}>
+                <Image
+                  src={item}
+                  className={style.swiperItemImg}
+                  width="355"
+                  height="150"
+                />
+              </SwiperItem>
+            ))}
+          </Swiper>
+        </View>
+        {/* <AtButton type="primary">按钮文案</AtButton> */}
       </View>
     );
   }

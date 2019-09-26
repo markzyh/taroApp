@@ -1,6 +1,6 @@
 import Taro, { Component } from "@tarojs/taro";
 import { View, Text, Button } from "@tarojs/components";
-import "./login.less";
+// import "./login.less";
 export default class Login extends Component {
   config = {
     navigationBarTitleText: "另一个页面"
