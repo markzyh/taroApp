@@ -4,20 +4,33 @@ import { AtButton } from "taro-ui";
 import { View, Text, Swiper, SwiperItem, Image } from "@tarojs/components";
 import avatarImg from "../../static/images/avatar.png";
 import calendarImg from "../../static/images/icon-calendar.png";
+import marksTop from "../../static/images/marks-top.png";
+import marksDown from "../../static/images/marks-down.png";
+import reloadIcon from "../../static/images/icon-reload.png";
+import barrageIcon from "../../static/images/barrageIcon.png";
 
 export default class Index extends Component {
   config = {
     navigationBarTitleText: "首页"
   };
   state = {
-    imgUrls: [
-      "https://img10.360buyimg.com/babel/s700x360_jfs/t25855/203/725883724/96703/5a598a0f/5b7a22e1Nfd6ba344.jpg!q90!cc_350x180",
-      "https://img11.360buyimg.com/babel/s700x360_jfs/t1/4776/39/2280/143162/5b9642a5E83bcda10/d93064343eb12276.jpg!q90!cc_350x180",
-      "https://img14.360buyimg.com/babel/s700x360_jfs/t1/4099/12/2578/101668/5b971b4bE65ae279d/89dd1764797acfd9.jpg!q90!cc_350x180"
-    ]
+    current: 1,
+    text: "必须有人疾呼“要建造金字塔”，做不到也没关系。",
+    barrageList: ["要是能重来，我要选李白"],
+    styleList: [],
+    test: "1111111"
   };
 
-  componentWillMount() {}
+  componentWillMount() {
+    setTimeout(() => {
+      this.state.barrageList.map((item, index) => {
+        this.state.styleList.push(`right:${index * 10}px;opacipy:1`);
+      });
+      this.setState({
+        test: "2222222"
+      });
+    }, 1000);
+  }
 
   componentDidMount() {}
 
@@ -28,42 +41,62 @@ export default class Index extends Component {
   componentDidHide() {}
 
   render() {
-    const {
-      current,
-      isAutoplay,
-      duration,
-      isCircular,
-      interval,
-      hasIndicatorDots,
-      imgUrls
-    } = this.state;
+    const { current, text, barrageList, styleList, test } = this.state;
+    console.log(styleList[0]);
     return (
       <View className={style.index}>
         <View className={style.header}>
-          <img src={avatarImg} alt="" className={style.avatarImg} />
+          <Image src={avatarImg} alt="" className={style.avatarImg}></Image>
           亲爱的，下午好
-          <img src={calendarImg} alt="" className={style.calendarImg} />
+          {test}
+          <Image src={calendarImg} alt="" className={style.calendarImg}></Image>
         </View>
         <View className={style.swiper}>
-          <Swiper
-            className={style.swiperContainer}
-            indicatorColor="#999"
-            indicatorActiveColor="#333"
-            current="1"
-          >
-            {imgUrls.map((item, idx) => (
-              <SwiperItem key={idx} className={style.swiperItem}>
-                <Image
-                  src={item}
-                  className={style.swiperItemImg}
-                  width="355"
-                  height="150"
-                />
-              </SwiperItem>
-            ))}
+          <Swiper className={style.swiperContainer} current={current}>
+            <SwiperItem className={style.swiperItem}>
+              <View className={style.swiperItemImg}>
+                <View className={style.title}>
+                  <Text className={style.day}>30</Text>
+                  <View className={style.date}>
+                    <View>2019年8月</View>
+                    <View>星期五 农历七月三十</View>
+                  </View>
+                </View>
+                <View className={style.line}></View>
+                <View className={style.marksTop}>
+                  <Image src={marksTop} className={style.marksTopImg}></Image>
+                  <View className={style.tips}>
+                    <Image
+                      src={reloadIcon}
+                      className={style.reloadIcon}
+                    ></Image>
+                    换一句
+                  </View>
+                </View>
+                <View className={style.text}>{text}</View>
+                <View className={style.button}></View>
+                <View className={style.barrage}>
+                  {/* {setTimeout(() => { */}
+                  {barrageList.map((item, index) => (
+                    <View
+                      className={style.barrageItem}
+                      style={styleList[index]}
+                    >
+                      <Image
+                        src={barrageIcon}
+                        className={style.barrageIcon}
+                      ></Image>
+                      {/* <Text>{item}</Text> */}
+                      <Text>1111</Text>
+                    </View>
+                  ))}
+                  {/* }, 1000)} */}
+                </View>
+                <Image src={marksDown} className={style.marksDown}></Image>
+              </View>
+            </SwiperItem>
           </Swiper>
         </View>
-        {/* <AtButton type="primary">按钮文案</AtButton> */}
       </View>
     );
   }
