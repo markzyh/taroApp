@@ -17,17 +17,18 @@ export default class Index extends Component {
     current: 1,
     text: "必须有人疾呼“要建造金字塔”，做不到也没关系。",
     barrageList: ["要是能重来，我要选李白"],
-    styleList: [],
+    startBarrage: false,
     test: "1111111"
   };
 
   componentWillMount() {
     setTimeout(() => {
-      this.state.barrageList.map((item, index) => {
-        this.state.styleList.push(`right:${index * 10}px;opacipy:1`);
-      });
+      // this.state.barrageList.map((item, index) => {
+      //   this.state.styleList.push(`right:${index * 10}px;opacipy:1`);
+      // });
       this.setState({
-        test: "2222222"
+        // test: "2222222"
+        startBarrage: true
       });
     }, 1000);
   }
@@ -41,8 +42,7 @@ export default class Index extends Component {
   componentDidHide() {}
 
   render() {
-    const { current, text, barrageList, styleList, test } = this.state;
-    console.log(styleList[0]);
+    const { current, text, barrageList, test, startBarrage } = this.state;
     return (
       <View className={style.index}>
         <View className={style.header}>
@@ -79,15 +79,15 @@ export default class Index extends Component {
                   {/* {setTimeout(() => { */}
                   {barrageList.map((item, index) => (
                     <View
-                      className={style.barrageItem}
-                      style={styleList[index]}
+                      className={`${style.barrageItem} ${
+                        startBarrage ? style.transition : ""
+                      }`}
                     >
                       <Image
                         src={barrageIcon}
                         className={style.barrageIcon}
                       ></Image>
-                      {/* <Text>{item}</Text> */}
-                      <Text>1111</Text>
+                      <Text>{item}</Text>
                     </View>
                   ))}
                   {/* }, 1000)} */}
