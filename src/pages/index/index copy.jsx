@@ -1,13 +1,7 @@
 import Taro, { Component } from "@tarojs/taro";
 import style from "./index.module.scss";
-import {
-  View,
-  Text,
-  Swiper,
-  SwiperItem,
-  Image,
-  Canvas
-} from "@tarojs/components";
+import { AtButton } from "taro-ui";
+import { View, Text, Swiper, SwiperItem, Image } from "@tarojs/components";
 import avatarImg from "../../static/images/avatar.png";
 import calendarImg from "../../static/images/icon-calendar.png";
 import marksTop from "../../static/images/marks-top.png";
@@ -42,13 +36,7 @@ export default class Index extends Component {
     }, 1000);
   }
 
-  componentDidMount() {
-    const context = Taro.createCanvasContext("barrage");
-    context.setStrokeStyle("#00ff00");
-    context.setLineWidth(5);
-
-    context.draw();
-  }
+  componentDidMount() {}
 
   componentWillUnmount() {}
 
@@ -90,11 +78,7 @@ export default class Index extends Component {
                 <View className={style.text}>{text}</View>
                 <View className={style.button}></View>
                 <View className={style.barrage}>
-                  <Canvas
-                    style="width: 300px; height: 200px;"
-                    canvasId="barrage"
-                  />
-                  {/* {barrageList.map((item, index) => (
+                  {barrageList.map((item, index) => (
                     <View
                       className={`${style.barrageItem} ${
                         startBarrage ? style.transition : ""
@@ -107,7 +91,7 @@ export default class Index extends Component {
                       ></Image>
                       <Text>{item}</Text>
                     </View>
-                  ))} */}
+                  ))}
                 </View>
                 <Image src={marksDown} className={style.marksDown}></Image>
               </View>
