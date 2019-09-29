@@ -16,18 +16,22 @@ export default class Index extends Component {
   state = {
     current: 1,
     text: "必须有人疾呼“要建造金字塔”，做不到也没关系。",
-    barrageList: ["要是能重来，我要选李白"],
+    barrageList: ["要是能重来，我要选李白", "弹幕2", "弹幕3"],
     startBarrage: false,
-    test: "1111111"
+    styleList: []
   };
 
   componentWillMount() {
+    const { barrageList } = this.state;
+    barrageList.map((item, index) => {
+      const random = Math.floor(Math.random() * (100 - 0 + 1) + 0);
+      this.state.styleList.push(`top:${random}px;animation-delay:${index}s`);
+    });
     setTimeout(() => {
       // this.state.barrageList.map((item, index) => {
       //   this.state.styleList.push(`right:${index * 10}px;opacipy:1`);
       // });
       this.setState({
-        // test: "2222222"
         startBarrage: true
       });
     }, 1000);
@@ -42,13 +46,12 @@ export default class Index extends Component {
   componentDidHide() {}
 
   render() {
-    const { current, text, barrageList, test, startBarrage } = this.state;
+    const { current, text, barrageList, startBarrage, styleList } = this.state;
     return (
       <View className={style.index}>
         <View className={style.header}>
           <Image src={avatarImg} alt="" className={style.avatarImg}></Image>
           亲爱的，下午好
-          {test}
           <Image src={calendarImg} alt="" className={style.calendarImg}></Image>
         </View>
         <View className={style.swiper}>
@@ -76,12 +79,12 @@ export default class Index extends Component {
                 <View className={style.text}>{text}</View>
                 <View className={style.button}></View>
                 <View className={style.barrage}>
-                  {/* {setTimeout(() => { */}
                   {barrageList.map((item, index) => (
                     <View
                       className={`${style.barrageItem} ${
                         startBarrage ? style.transition : ""
                       }`}
+                      style={styleList[index]}
                     >
                       <Image
                         src={barrageIcon}
@@ -90,7 +93,6 @@ export default class Index extends Component {
                       <Text>{item}</Text>
                     </View>
                   ))}
-                  {/* }, 1000)} */}
                 </View>
                 <Image src={marksDown} className={style.marksDown}></Image>
               </View>
