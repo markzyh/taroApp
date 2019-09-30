@@ -43,11 +43,12 @@ export default class Index extends Component {
   }
 
   componentDidMount() {
-    const context = Taro.createCanvasContext("barrage");
-    context.setStrokeStyle("#00ff00");
-    context.setLineWidth(5);
-
-    context.draw();
+    // const context = Taro.createCanvasContext("barrage");
+    // context.font = "20px Microsoft YaHei";
+    // context.fillStyle = "#000000";
+    // context.fillText("canvas 绘制文字", 10, 20);
+    // context.clearRect(0, 0, 100, 40);
+    // context.draw();
   }
 
   componentWillUnmount() {}
@@ -90,11 +91,11 @@ export default class Index extends Component {
                 <View className={style.text}>{text}</View>
                 <View className={style.button}></View>
                 <View className={style.barrage}>
-                  <Canvas
+                  {/* <Canvas
                     style="width: 300px; height: 200px;"
                     canvasId="barrage"
-                  />
-                  {/* {barrageList.map((item, index) => (
+                  /> */}
+                  {barrageList.map((item, index) => (
                     <View
                       className={`${style.barrageItem} ${
                         startBarrage ? style.transition : ""
@@ -107,7 +108,7 @@ export default class Index extends Component {
                       ></Image>
                       <Text>{item}</Text>
                     </View>
-                  ))} */}
+                  ))}
                 </View>
                 <Image src={marksDown} className={style.marksDown}></Image>
               </View>
